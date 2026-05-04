@@ -53,6 +53,7 @@ export default defineConfig([
     extends: ["css/recommended"],
     rules: {
       "css/no-invalid-at-rules": "off",
+      "css/use-baseline": ["error", { available: "newly" }],
     },
   },
   eslintConfigPrettier,
