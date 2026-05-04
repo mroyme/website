@@ -10,6 +10,7 @@ type TableData = {
 };
 
 function Table({ data }: { data: TableData }) {
+  /* eslint-disable @eslint-react/no-array-index-key -- static MDX tables don't reorder */
   const headers = data.headers.map((header, index) => (
     <th key={index}>{header}</th>
   ));
@@ -20,6 +21,7 @@ function Table({ data }: { data: TableData }) {
       ))}
     </tr>
   ));
+  /* eslint-enable @eslint-react/no-array-index-key */
 
   return (
     <table>
@@ -56,6 +58,7 @@ function Code({
   ...props
 }: React.ComponentPropsWithoutRef<"code"> & { children: string }) {
   const codeHTML = highlight(children);
+  // eslint-disable-next-line @eslint-react/dom-no-dangerously-set-innerhtml -- sugar-high returns trusted HTML for syntax highlighting
   return <code dangerouslySetInnerHTML={{ __html: codeHTML }} {...props} />;
 }
 
