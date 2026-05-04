@@ -69,29 +69,31 @@ export default async function Blog({
     notFound();
   }
 
+  // Escape `<` so a stray `</script>` in any field can't break out of the script tag.
+  const ldJson = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.metadata.title,
+    datePublished: post.metadata.publishedAt,
+    dateModified: post.metadata.publishedAt,
+    description: post.metadata.summary,
+    image: post.metadata.image
+      ? `${baseUrl}${post.metadata.image}`
+      : `/og?title=${encodeURIComponent(post.metadata.title)}`,
+    url: `${baseUrl}/blog/${post.slug}`,
+    author: {
+      "@type": "Person",
+      name: "My Portfolio",
+    },
+  }).replace(/</g, "\\u003c");
+
   return (
     <section>
       <script
         type="application/ld+json"
         suppressHydrationWarning
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BlogPosting",
-            headline: post.metadata.title,
-            datePublished: post.metadata.publishedAt,
-            dateModified: post.metadata.publishedAt,
-            description: post.metadata.summary,
-            image: post.metadata.image
-              ? `${baseUrl}${post.metadata.image}`
-              : `/og?title=${encodeURIComponent(post.metadata.title)}`,
-            url: `${baseUrl}/blog/${post.slug}`,
-            author: {
-              "@type": "Person",
-              name: "My Portfolio",
-            },
-          }),
-        }}
+        // eslint-disable-next-line @eslint-react/dom-no-dangerously-set-innerhtml -- required for JSON-LD structured data
+        dangerouslySetInnerHTML={{ __html: ldJson }}
       />
       <h1 className="title text-2xl font-semibold tracking-tighter">
         {post.metadata.title}
