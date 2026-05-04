@@ -1,3 +1,5 @@
+const currentYear = new Date().getFullYear();
+
 function ArrowIcon() {
   return (
     <svg
@@ -54,7 +56,7 @@ export default function Footer() {
         </li>
       </ul>
       <p className="mt-8 text-neutral-600 dark:text-neutral-300">
-        © {new Date().getFullYear()} MIT Licensed
+        © {currentYear} MIT Licensed
       </p>
     </footer>
   );
