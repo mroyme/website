@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+/* eslint-disable-next-line css/use-baseline -- ::selection is universally supported despite Baseline's legacy-prefix flag */
 ::selection {
   background-color: #47a3f3;
   color: #fefefe;
@@ -116,9 +117,8 @@ html {
 }
 
 .prose > :first-child {
-  /* Override removing top margin, causing layout shift */
-  margin-top: 1.25em !important;
-  margin-bottom: 1.25em !important;
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
 }
 
 pre::-webkit-scrollbar {
