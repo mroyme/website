@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { CustomMDX } from "app/components/mdx";
 import { formatDate, getBlogPosts } from "app/blog/utils";
 import { baseUrl } from "app/sitemap";
+import { author } from "app/site";
 
 export async function generateStaticParams() {
   const posts = getBlogPosts();
@@ -83,7 +84,7 @@ export default async function Blog({
     url: `${baseUrl}/blog/${post.slug}`,
     author: {
       "@type": "Person",
-      name: "Madhurjya Roy",
+      name: author,
     },
   }).replace(/</g, "\\u003c");
 

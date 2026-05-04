@@ -1,5 +1,6 @@
 import { baseUrl } from "app/sitemap";
 import { getBlogPosts } from "app/blog/utils";
+import { author } from "app/site";
 
 export async function GET() {
   const allBlogs = getBlogPosts();
@@ -27,9 +28,9 @@ export async function GET() {
   const rssFeed = `<?xml version="1.0" encoding="UTF-8" ?>
   <rss version="2.0">
     <channel>
-        <title>Madhurjya Roy</title>
+        <title>${author}</title>
         <link>${baseUrl}</link>
-        <description>Writing by Madhurjya Roy</description>
+        <description>Writing by ${author}</description>
         ${itemsXml}
     </channel>
   </rss>`;

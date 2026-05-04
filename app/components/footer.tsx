@@ -1,3 +1,5 @@
+import { author } from "app/site";
+
 const currentYear = new Date().getFullYear();
 
 function ArrowIcon() {
@@ -67,7 +69,7 @@ export default function Footer() {
         </li>
       </ul>
       <p className="mt-8 text-neutral-600 dark:text-neutral-300">
-        © {currentYear} MIT Licensed
+        © {currentYear} {author}
       </p>
     </footer>
   );

@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { BlogPosts } from "app/components/posts";
+import { description } from "app/site";
 
 export const metadata: Metadata = {
   title: "Writing",
-  description:
-    "Software Engineer at Nexthink, working on backend, platform, and infrastructure.",
+  description,
 };
 
 export default function Page() {

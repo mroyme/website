@@ -7,21 +7,20 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Footer from "./components/footer";
 import { baseUrl } from "./sitemap";
+import { author, description } from "./site";
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: "Madhurjya Roy",
-    template: "%s | Madhurjya Roy",
+    default: author,
+    template: `%s | ${author}`,
   },
-  description:
-    "Software Engineer at Nexthink, working on backend, platform, and infrastructure.",
+  description,
   openGraph: {
-    title: "Madhurjya Roy",
-    description:
-      "Software Engineer at Nexthink, working on backend, platform, and infrastructure.",
+    title: author,
+    description,
     url: baseUrl,
-    siteName: "Madhurjya Roy",
+    siteName: author,
     locale: "en_US",
     type: "website",
   },

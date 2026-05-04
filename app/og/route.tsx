@@ -1,8 +1,9 @@
 import { ImageResponse } from "next/og";
+import { author } from "app/site";
 
 export function GET(request: Request) {
   const url = new URL(request.url);
-  const title = url.searchParams.get("title") || "Madhurjya Roy";
+  const title = url.searchParams.get("title") || author;
 
   return new ImageResponse(
     <div tw="flex flex-col w-full h-full items-center justify-center bg-white">
