@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { formatDate, getBlogPosts } from "app/blog/utils";
-import { baseUrl } from "app/sitemap";
-import { author } from "app/site";
+import { author, siteUrl } from "app/site";
 
 export async function generateStaticParams() {
   const posts = await getBlogPosts();
@@ -31,7 +30,7 @@ export async function generateMetadata({
   } = post.metadata;
   const ogImage = image
     ? image
-    : `${baseUrl}/og?title=${encodeURIComponent(title)}`;
+    : `${siteUrl}/og?title=${encodeURIComponent(title)}`;
 
   return {
     title,
@@ -41,7 +40,7 @@ export async function generateMetadata({
       description,
       type: "article",
       publishedTime,
-      url: `${baseUrl}/blog/${post.slug}`,
+      url: `${siteUrl}/blog/${post.slug}`,
       images: [
         {
           url: ogImage,
@@ -80,9 +79,9 @@ export default async function Blog({
     dateModified: post.metadata.publishedAt,
     description: post.metadata.summary,
     image: post.metadata.image
-      ? `${baseUrl}${post.metadata.image}`
-      : `/og?title=${encodeURIComponent(post.metadata.title)}`,
-    url: `${baseUrl}/blog/${post.slug}`,
+      ? `${siteUrl}${post.metadata.image}`
+      : `${siteUrl}/og?title=${encodeURIComponent(post.metadata.title)}`,
+    url: `${siteUrl}/blog/${post.slug}`,
     author: {
       "@type": "Person",
       name: author,

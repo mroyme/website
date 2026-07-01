@@ -1,15 +1,14 @@
 import { Feed } from "feed";
 import { getBlogPosts } from "app/blog/utils";
-import { author, description } from "app/site";
-import { baseUrl } from "app/sitemap";
+import { author, description, locale, siteUrl } from "app/site";
 
 export async function GET() {
   const feed = new Feed({
     title: author,
     description,
-    id: baseUrl,
-    link: baseUrl,
-    language: "en-GB",
+    id: siteUrl,
+    link: siteUrl,
+    language: locale.feed,
     copyright: `All rights reserved ${new Date().getFullYear()}, ${author}`,
     author: {
       name: author,
@@ -17,7 +16,7 @@ export async function GET() {
   });
 
   for (const post of await getBlogPosts()) {
-    const url = `${baseUrl}/blog/${post.slug}`;
+    const url = `${siteUrl}/blog/${post.slug}`;
 
     feed.addItem({
       title: post.metadata.title,
