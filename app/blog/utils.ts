@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import type { ComponentType } from "react";
+import { locale } from "app/site";
 
 export type PostMetadata = {
   title: string;
@@ -70,9 +71,9 @@ export function formatDate(date: string, includeRelative = false) {
     formattedDate = "Today";
   }
 
-  const fullDate = targetDate.toLocaleString("en-us", {
-    month: "long",
+  const fullDate = targetDate.toLocaleDateString(locale.date, {
     day: "numeric",
+    month: "long",
     year: "numeric",
   });
 

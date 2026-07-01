@@ -1,15 +1,14 @@
 import { getBlogPosts } from "app/blog/utils";
-
-export const baseUrl = "https://www.mroy.me";
+import { siteUrl } from "app/site";
 
 export default async function sitemap() {
   const blogs = (await getBlogPosts()).map((post) => ({
-    url: `${baseUrl}/blog/${post.slug}`,
+    url: `${siteUrl}/blog/${post.slug}`,
     lastModified: post.metadata.publishedAt,
   }));
 
   const routes = ["", "/blog"].map((route) => ({
-    url: `${baseUrl}${route}`,
+    url: `${siteUrl}${route}`,
     lastModified: new Date().toISOString().split("T")[0],
   }));
 

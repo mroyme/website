@@ -7,11 +7,10 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Footer from "./components/footer";
 import { ThemeProvider } from "./components/theme-provider";
-import { baseUrl } from "./sitemap";
-import { author, description } from "./site";
+import { author, description, locale, siteUrl } from "./site";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(baseUrl),
+  metadataBase: new URL(siteUrl),
   title: {
     default: author,
     template: `%s | ${author}`,
@@ -20,9 +19,9 @@ export const metadata: Metadata = {
   openGraph: {
     title: author,
     description,
-    url: baseUrl,
+    url: siteUrl,
     siteName: author,
-    locale: "en_US",
+    locale: locale.openGraph,
     type: "website",
   },
   robots: {
@@ -47,7 +46,7 @@ export default function RootLayout({
 }) {
   return (
     <html
-      lang="en"
+      lang={locale.html}
       suppressHydrationWarning
       className={cx(
         "bg-white text-neutral-900 dark:bg-neutral-950 dark:text-neutral-50",
