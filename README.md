@@ -1,4 +1,4 @@
-# madhurjya.dev
+# mroy.me
 
 Personal website and writing archive built with Next.js, MDX, Tailwind CSS, and Bun.
 
