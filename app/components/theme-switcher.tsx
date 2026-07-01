@@ -29,7 +29,7 @@ export function ThemeSwitcher() {
     <button
       type="button"
       onClick={() => setTheme(nextTheme)}
-      className="text-muted-foreground hover:text-foreground focus-visible:ring-ring focus-visible:ring-offset-background relative m-1 flex rounded-sm px-2 py-1 align-middle transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
+      className="focus-visible:ring-ring relative m-1 flex rounded-sm px-2 py-1 align-middle text-neutral-600 transition-colors hover:text-neutral-900 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white focus-visible:outline-none dark:text-neutral-300 dark:hover:text-neutral-50 dark:focus-visible:ring-offset-neutral-950"
       aria-label={`Switch to ${nextTheme} mode`}
       title={`Switch to ${nextTheme} mode`}
       suppressHydrationWarning

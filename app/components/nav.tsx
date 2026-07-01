@@ -33,8 +33,10 @@ export function Navbar() {
                   key={path}
                   href={path}
                   aria-current={isActive ? "page" : undefined}
-                  className={`hover:text-accent focus-visible:ring-ring focus-visible:ring-offset-background relative m-1 flex rounded-sm px-2 py-1 align-middle transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none ${
-                    isActive ? "text-accent" : "text-muted-foreground"
+                  className={`hover:text-accent focus-visible:ring-ring relative m-1 flex rounded-sm px-2 py-1 align-middle transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white focus-visible:outline-none dark:focus-visible:ring-offset-neutral-950 ${
+                    isActive
+                      ? "text-accent"
+                      : "text-neutral-600 dark:text-neutral-300"
                   }`}
                 >
                   {name}

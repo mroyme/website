@@ -13,10 +13,10 @@ export async function BlogPosts() {
           href={`/blog/${post.slug}`}
         >
           <div className="flex w-full flex-col space-x-0 md:flex-row md:space-x-2">
-            <p className="text-muted-foreground group-hover:text-accent/75 w-35 whitespace-nowrap tabular-nums transition-colors">
+            <p className="group-hover:text-accent/75 w-35 whitespace-nowrap text-neutral-600 tabular-nums transition-colors dark:text-neutral-300">
               {formatDate(post.metadata.publishedAt, false)}
             </p>
-            <p className="text-foreground group-hover:text-accent tracking-tight transition-colors">
+            <p className="group-hover:text-accent tracking-tight text-neutral-900 transition-colors dark:text-neutral-50">
               {post.metadata.title}
             </p>
           </div>

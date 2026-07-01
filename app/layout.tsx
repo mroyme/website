@@ -49,9 +49,13 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={cx(GeistSans.variable, GeistMono.variable)}
+      className={cx(
+        "bg-white text-neutral-900 dark:bg-neutral-950 dark:text-neutral-50",
+        GeistSans.variable,
+        GeistMono.variable,
+      )}
     >
-      <body className="bg-background text-foreground selection:bg-accent/15 selection:text-accent-hover dark:selection:bg-accent/35 dark:selection:text-background mx-4 mt-8 max-w-xl antialiased lg:mx-auto">
+      <body className="selection:bg-accent/15 selection:text-accent-hover dark:selection:bg-accent/35 mx-4 mt-8 max-w-xl antialiased lg:mx-auto dark:selection:text-neutral-950">
         <ThemeProvider>
           <main className="mt-6 flex min-w-0 flex-auto flex-col px-2 md:px-0">
             <Navbar />
