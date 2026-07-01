@@ -10,7 +10,6 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-hover: var(--accent-hover);
-  --color-anchor: var(--anchor);
   --color-ring: var(--ring);
 }
 
@@ -21,7 +20,6 @@
   --muted-foreground: #525252;
   --accent: #0369a1;
   --accent-hover: #075985;
-  --anchor: var(--accent);
   --ring: var(--accent);
 }
 
@@ -32,7 +30,6 @@
   --muted-foreground: #d4d4d4;
   --accent: #7dd3fc;
   --accent-hover: #bae6fd;
-  --anchor: var(--accent);
   --ring: var(--accent);
 }
 
@@ -48,27 +45,4 @@ html {
 
 .prose a:hover {
   @apply text-accent-hover decoration-accent-hover;
-}
-
-.prose .anchor {
-  @apply invisible absolute no-underline;
-
-  margin-left: -1em;
-  padding-right: 0.5em;
-  width: 80%;
-  max-width: 700px;
-  cursor: pointer;
-}
-
-.anchor:hover {
-  @apply visible;
-}
-
-.prose .anchor:after {
-  @apply text-anchor;
-  content: "#";
-}
-
-.prose *:hover > .anchor {
-  @apply visible;
 }
