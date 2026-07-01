@@ -6,6 +6,7 @@ import { Navbar } from "./components/nav";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Footer from "./components/footer";
+import { ThemeProvider } from "./components/theme-provider";
 import { baseUrl } from "./sitemap";
 import { author, description } from "./site";
 
@@ -37,7 +38,7 @@ export const metadata: Metadata = {
   },
 };
 
-const cx = (...classes) => classes.filter(Boolean).join(" ");
+const cx = (...classes: string[]) => classes.filter(Boolean).join(" ");
 
 export default function RootLayout({
   children,
@@ -47,20 +48,23 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={cx(
-        "bg-white text-black dark:bg-black dark:text-white",
+        "bg-white text-neutral-900 dark:bg-neutral-950 dark:text-neutral-50",
         GeistSans.variable,
         GeistMono.variable,
       )}
     >
-      <body className="mx-4 mt-8 max-w-xl antialiased lg:mx-auto">
-        <main className="mt-6 flex min-w-0 flex-auto flex-col px-2 md:px-0">
-          <Navbar />
-          {children}
-          <Footer />
-          <Analytics />
-          <SpeedInsights />
-        </main>
+      <body className="selection:bg-accent/15 selection:text-accent-hover dark:selection:bg-accent/35 mx-4 mt-8 max-w-xl antialiased lg:mx-auto dark:selection:text-neutral-950">
+        <ThemeProvider>
+          <main className="mt-6 flex min-w-0 flex-auto flex-col px-2 md:px-0">
+            <Navbar />
+            {children}
+            <Footer />
+            <Analytics />
+            <SpeedInsights />
+          </main>
+        </ThemeProvider>
       </body>
     </html>
   );

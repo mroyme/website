@@ -1,42 +1,41 @@
-# Portfolio Blog Starter
+# madhurjya.dev
 
-This is a porfolio site template complete with a blog. Includes:
+Personal website and writing archive built with Next.js, MDX, Tailwind CSS, and Bun.
 
-- MDX and Markdown support
-- Optimized for SEO (sitemap, robots, JSON-LD schema)
-- RSS Feed
-- Dynamic OG images
-- Syntax highlighting
-- Tailwind v4
-- Vercel Speed Insights / Web Analytics
-- Geist font
+## Requirements
 
-## Demo
+- Bun 1.3.14 or newer
 
-https://portfolio-blog-starter.vercel.app
+## Development
 
-## How to Use
-
-You can choose from one of the following two methods to use this repository:
-
-### One-Click Deploy
-
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=vercel-examples):
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/examples/tree/main/solutions/blog&project-name=blog&repository-name=blog)
-
-### Clone and Deploy
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [pnpm](https://pnpm.io/installation) to bootstrap the example:
+Install dependencies:
 
 ```bash
-pnpm create next-app --example https://github.com/vercel/examples/tree/main/solutions/blog blog
+bun install
 ```
 
-Then, run Next.js in development mode:
+Run the local development server:
 
 ```bash
-pnpm dev
+bun run dev
 ```
 
-Deploy it to the cloud with [Vercel](https://vercel.com/templates) ([Documentation](https://nextjs.org/docs/app/building-your-application/deploying)).
+Run all checks before shipping changes:
+
+```bash
+bun run check
+```
+
+## Scripts
+
+- `bun run dev` - start Next.js in development mode with the Bun runtime
+- `bun run build` - create a production build with the Bun runtime
+- `bun run start` - start the production server with the Bun runtime
+- `bun run typecheck` - run TypeScript without emitting files
+- `bun run lint` - run ESLint
+- `bun run format:check` - check Prettier formatting
+- `bun run format` - format the project
+
+## Deployment
+
+Vercel uses Bun because this repository commits `bun.lock` and configures `bunVersion` in `vercel.json`.

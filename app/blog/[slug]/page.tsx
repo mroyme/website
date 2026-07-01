@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { CustomMDX } from "app/components/mdx";
 import { formatDate, getBlogPosts } from "app/blog/utils";
 import { baseUrl } from "app/sitemap";
 import { author } from "app/site";
 
 export async function generateStaticParams() {
-  const posts = getBlogPosts();
+  const posts = await getBlogPosts();
 
   return posts.map((post) => ({
     slug: post.slug,
@@ -19,7 +18,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata | undefined> {
   const { slug } = await params;
-  const post = getBlogPosts().find((post) => post.slug === slug);
+  const post = (await getBlogPosts()).find((post) => post.slug === slug);
   if (!post) {
     return;
   }
@@ -64,11 +63,13 @@ export default async function Blog({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = getBlogPosts().find((post) => post.slug === slug);
+  const post = (await getBlogPosts()).find((post) => post.slug === slug);
 
   if (!post) {
     notFound();
   }
+
+  const Post = post.Component;
 
   // Escape `<` so a stray `</script>` in any field can't break out of the script tag.
   const ldJson = JSON.stringify({
@@ -90,22 +91,19 @@ export default async function Blog({
 
   return (
     <section>
-      <script
-        type="application/ld+json"
-        suppressHydrationWarning
-        // eslint-disable-next-line @eslint-react/dom-no-dangerously-set-innerhtml -- required for JSON-LD structured data
-        dangerouslySetInnerHTML={{ __html: ldJson }}
-      />
-      <h1 className="title text-2xl font-semibold tracking-tighter">
+      <script type="application/ld+json" suppressHydrationWarning>
+        {ldJson}
+      </script>
+      <h1 className="text-2xl font-semibold tracking-tighter">
         {post.metadata.title}
       </h1>
       <div className="mt-2 mb-8 flex items-center justify-between text-sm">
-        <p className="text-sm text-neutral-600 dark:text-neutral-400">
+        <p className="text-sm text-neutral-600 dark:text-neutral-300">
           {formatDate(post.metadata.publishedAt)}
         </p>
       </div>
-      <article className="prose">
-        <CustomMDX source={post.content} />
+      <article className="prose prose-neutral dark:prose-invert">
+        <Post />
       </article>
     </section>
   );
