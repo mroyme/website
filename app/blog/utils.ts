@@ -1,56 +1,50 @@
-import fs from "fs";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
+import type { ComponentType } from "react";
 
-type PostFrontmatter = {
+export type PostMetadata = {
   title: string;
   publishedAt: string;
   summary: string;
   image?: string;
 };
 
-function parseFrontmatter(fileContent: string) {
-  const frontmatterRegex = /---\s*([\s\S]*?)\s*---/;
-  const match = frontmatterRegex.exec(fileContent);
-  const frontMatterBlock = match![1];
-  const content = fileContent.replace(frontmatterRegex, "").trim();
-  const frontMatterLines = frontMatterBlock.trim().split("\n");
-  const metadata: Partial<PostFrontmatter> = {};
+export type BlogPost = {
+  slug: string;
+  metadata: PostMetadata;
+  Component: ComponentType;
+};
 
-  frontMatterLines.forEach((line) => {
-    const [key, ...valueArr] = line.split(": ");
-    let value = valueArr.join(": ").trim();
-    value = value.replace(/^['"](.*)['"]$/, "$1"); // Remove quotes
-    metadata[key.trim() as keyof PostFrontmatter] = value;
-  });
+const postsDirectory = path.join(process.cwd(), "app", "blog", "posts");
 
-  return { metadata: metadata as PostFrontmatter, content };
+function getPostSlugs() {
+  return fs
+    .readdirSync(postsDirectory)
+    .filter((file) => path.extname(file) === ".mdx")
+    .map((file) => path.basename(file, ".mdx"));
 }
 
-function getMDXFiles(dir: string) {
-  return fs.readdirSync(dir).filter((file) => path.extname(file) === ".mdx");
+async function getPost(slug: string): Promise<BlogPost> {
+  const post = (await import(`./posts/${slug}.mdx`)) as {
+    default: ComponentType;
+    metadata: PostMetadata;
+  };
+
+  return {
+    slug,
+    metadata: post.metadata,
+    Component: post.default,
+  };
 }
 
-function readMDXFile(filePath: string) {
-  const rawContent = fs.readFileSync(filePath, "utf-8");
-  return parseFrontmatter(rawContent);
-}
+export async function getBlogPosts() {
+  const posts = await Promise.all(getPostSlugs().map(getPost));
 
-function getMDXData(dir: string) {
-  const mdxFiles = getMDXFiles(dir);
-  return mdxFiles.map((file) => {
-    const { metadata, content } = readMDXFile(path.join(dir, file));
-    const slug = path.basename(file, path.extname(file));
-
-    return {
-      metadata,
-      slug,
-      content,
-    };
-  });
-}
-
-export function getBlogPosts() {
-  return getMDXData(path.join(process.cwd(), "app", "blog", "posts"));
+  return posts.sort(
+    (a, b) =>
+      new Date(b.metadata.publishedAt).getTime() -
+      new Date(a.metadata.publishedAt).getTime(),
+  );
 }
 
 export function formatDate(date: string, includeRelative = false) {

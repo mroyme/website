@@ -1,43 +1,36 @@
-import { baseUrl } from "app/sitemap";
+import { Feed } from "feed";
 import { getBlogPosts } from "app/blog/utils";
-import { author } from "app/site";
+import { author, description } from "app/site";
+import { baseUrl } from "app/sitemap";
 
 export async function GET() {
-  const allBlogs = getBlogPosts();
+  const feed = new Feed({
+    title: author,
+    description,
+    id: baseUrl,
+    link: baseUrl,
+    language: "en",
+    copyright: `All rights reserved ${new Date().getFullYear()}, ${author}`,
+    author: {
+      name: author,
+    },
+  });
 
-  const itemsXml = allBlogs
-    .sort((a, b) => {
-      if (new Date(a.metadata.publishedAt) > new Date(b.metadata.publishedAt)) {
-        return -1;
-      }
-      return 1;
-    })
-    .map(
-      (post) =>
-        `<item>
-          <title>${post.metadata.title}</title>
-          <link>${baseUrl}/blog/${post.slug}</link>
-          <description>${post.metadata.summary || ""}</description>
-          <pubDate>${new Date(
-            post.metadata.publishedAt,
-          ).toUTCString()}</pubDate>
-        </item>`,
-    )
-    .join("\n");
+  for (const post of await getBlogPosts()) {
+    const url = `${baseUrl}/blog/${post.slug}`;
 
-  const rssFeed = `<?xml version="1.0" encoding="UTF-8" ?>
-  <rss version="2.0">
-    <channel>
-        <title>${author}</title>
-        <link>${baseUrl}</link>
-        <description>Writing by ${author}</description>
-        ${itemsXml}
-    </channel>
-  </rss>`;
+    feed.addItem({
+      title: post.metadata.title,
+      id: url,
+      link: url,
+      description: post.metadata.summary,
+      date: new Date(post.metadata.publishedAt),
+    });
+  }
 
-  return new Response(rssFeed, {
+  return new Response(feed.rss2(), {
     headers: {
-      "Content-Type": "text/xml",
+      "Content-Type": "application/rss+xml; charset=utf-8",
     },
   });
 }
