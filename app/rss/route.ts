@@ -9,7 +9,7 @@ export async function GET() {
     description,
     id: baseUrl,
     link: baseUrl,
-    language: "en",
+    language: "en-GB",
     copyright: `All rights reserved ${new Date().getFullYear()}, ${author}`,
     author: {
       name: author,

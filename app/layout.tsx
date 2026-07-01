@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     description,
     url: baseUrl,
     siteName: author,
-    locale: "en_US",
+    locale: "en_GB",
     type: "website",
   },
   robots: {
@@ -47,7 +47,7 @@ export default function RootLayout({
 }) {
   return (
     <html
-      lang="en"
+      lang="en-GB"
       suppressHydrationWarning
       className={cx(
         "bg-white text-neutral-900 dark:bg-neutral-950 dark:text-neutral-50",
