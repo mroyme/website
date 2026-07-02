@@ -14,7 +14,7 @@ export async function BlogPosts() {
         >
           <div className="flex w-full flex-col space-x-0 md:flex-row md:space-x-2">
             <p className="group-hover:text-accent/75 w-35 whitespace-nowrap text-neutral-600 tabular-nums transition-colors dark:text-neutral-300">
-              {formatDate(post.metadata.publishedAt, false)}
+              {formatDate(post.metadata.publishedAt)}
             </p>
             <p className="group-hover:text-accent tracking-tight text-neutral-900 transition-colors dark:text-neutral-50">
               {post.metadata.title}

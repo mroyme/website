@@ -1,5 +1,5 @@
 import { Feed } from "feed";
-import { getBlogPosts } from "app/blog/utils";
+import { getBlogPosts, getBlogPostUrl } from "app/blog/utils";
 import { author, description, locale, siteUrl } from "app/site";
 
 export async function GET() {
@@ -16,7 +16,7 @@ export async function GET() {
   });
 
   for (const post of await getBlogPosts()) {
-    const url = `${siteUrl}/blog/${post.slug}`;
+    const url = getBlogPostUrl(post.slug);
 
     feed.addItem({
       title: post.metadata.title,

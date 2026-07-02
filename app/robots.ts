@@ -1,6 +1,7 @@
+import type { MetadataRoute } from "next";
 import { siteUrl } from "app/site";
 
-export default function robots() {
+export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {

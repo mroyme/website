@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import type { ComponentType } from "react";
-import { locale } from "app/site";
+import { locale, siteUrl } from "app/site";
 
 export type PostMetadata = {
   title: string;
@@ -48,38 +48,29 @@ export async function getBlogPosts() {
   );
 }
 
-export function formatDate(date: string, includeRelative = false) {
-  const currentDate = new Date();
-  if (!date.includes("T")) {
-    date = `${date}T00:00:00`;
-  }
-  const targetDate = new Date(date);
+export async function getBlogPost(slug: string) {
+  return (await getBlogPosts()).find((post) => post.slug === slug);
+}
 
-  const yearsAgo = currentDate.getFullYear() - targetDate.getFullYear();
-  const monthsAgo = currentDate.getMonth() - targetDate.getMonth();
-  const daysAgo = currentDate.getDate() - targetDate.getDate();
+export function getBlogPostUrl(slug: string) {
+  return new URL(`/blog/${slug}`, siteUrl).toString();
+}
 
-  let formattedDate: string;
-
-  if (yearsAgo > 0) {
-    formattedDate = `${yearsAgo}y ago`;
-  } else if (monthsAgo > 0) {
-    formattedDate = `${monthsAgo}mo ago`;
-  } else if (daysAgo > 0) {
-    formattedDate = `${daysAgo}d ago`;
-  } else {
-    formattedDate = "Today";
+export function getBlogPostImageUrl(metadata: PostMetadata) {
+  if (metadata.image) {
+    return new URL(metadata.image, siteUrl).toString();
   }
 
+  return `${siteUrl}/og?title=${encodeURIComponent(metadata.title)}`;
+}
+
+export function formatDate(date: string) {
+  const targetDate = new Date(date.includes("T") ? date : `${date}T00:00:00`);
   const fullDate = targetDate.toLocaleDateString(locale.date, {
     day: "numeric",
     month: "long",
     year: "numeric",
   });
 
-  if (!includeRelative) {
-    return fullDate;
-  }
-
-  return `${fullDate} (${formattedDate})`;
+  return fullDate;
 }

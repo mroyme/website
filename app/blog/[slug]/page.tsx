@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { formatDate, getBlogPosts } from "app/blog/utils";
-import { author, siteUrl } from "app/site";
+import {
+  formatDate,
+  getBlogPost,
+  getBlogPostImageUrl,
+  getBlogPosts,
+  getBlogPostUrl,
+} from "app/blog/utils";
+import { author } from "app/site";
 
 export async function generateStaticParams() {
   const posts = await getBlogPosts();
@@ -17,7 +23,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata | undefined> {
   const { slug } = await params;
-  const post = (await getBlogPosts()).find((post) => post.slug === slug);
+  const post = await getBlogPost(slug);
   if (!post) {
     return;
   }
@@ -26,11 +32,9 @@ export async function generateMetadata({
     title,
     publishedAt: publishedTime,
     summary: description,
-    image,
   } = post.metadata;
-  const ogImage = image
-    ? image
-    : `${siteUrl}/og?title=${encodeURIComponent(title)}`;
+  const url = getBlogPostUrl(post.slug);
+  const image = getBlogPostImageUrl(post.metadata);
 
   return {
     title,
@@ -40,10 +44,10 @@ export async function generateMetadata({
       description,
       type: "article",
       publishedTime,
-      url: `${siteUrl}/blog/${post.slug}`,
+      url,
       images: [
         {
-          url: ogImage,
+          url: image,
         },
       ],
     },
@@ -51,7 +55,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title,
       description,
-      images: [ogImage],
+      images: [image],
     },
   };
 }
@@ -62,13 +66,15 @@ export default async function Blog({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = (await getBlogPosts()).find((post) => post.slug === slug);
+  const post = await getBlogPost(slug);
 
   if (!post) {
     notFound();
   }
 
   const Post = post.Component;
+  const url = getBlogPostUrl(post.slug);
+  const image = getBlogPostImageUrl(post.metadata);
 
   // Escape `<` so a stray `</script>` in any field can't break out of the script tag.
   const ldJson = JSON.stringify({
@@ -78,10 +84,8 @@ export default async function Blog({
     datePublished: post.metadata.publishedAt,
     dateModified: post.metadata.publishedAt,
     description: post.metadata.summary,
-    image: post.metadata.image
-      ? `${siteUrl}${post.metadata.image}`
-      : `${siteUrl}/og?title=${encodeURIComponent(post.metadata.title)}`,
-    url: `${siteUrl}/blog/${post.slug}`,
+    image,
+    url,
     author: {
       "@type": "Person",
       name: author,
