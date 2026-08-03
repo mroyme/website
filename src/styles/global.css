@@ -123,7 +123,8 @@ code {
   border-radius: 0.125rem;
   background: var(--code-background);
   padding: 0.125rem 0.3125rem;
-  font-family: var(--font-lilex), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+  font-family:
+    var(--font-lilex), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     monospace;
   font-size: 0.875em;
   font-variant-ligatures: none;
@@ -139,7 +140,8 @@ pre {
 
 pre > code {
   all: unset;
-  font-family: var(--font-lilex), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+  font-family:
+    var(--font-lilex), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     monospace;
   font-variant-ligatures: none;
 }
