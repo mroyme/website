@@ -17,8 +17,8 @@ export default defineConfig({
     }),
     shikiConfig: {
       themes: {
-        light: "kanagawa-lotus",
-        dark: "kanagawa-dragon",
+          light: "catppuccin-latte",
+          dark: "catppuccin-mocha",
       },
     },
   },

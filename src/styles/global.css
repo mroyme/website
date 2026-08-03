@@ -142,13 +142,13 @@ pre > code {
 
 .astro-code,
 .astro-code span {
-  background-color: var(--background) !important;
+  background-color: var(--code-background) !important;
 }
 
 .dark .astro-code,
 .dark .astro-code span {
   color: var(--shiki-dark) !important;
-  background-color: var(--background) !important;
+  background-color: var(--code-background) !important;
   font-style: var(--shiki-dark-font-style) !important;
   font-weight: var(--shiki-dark-font-weight) !important;
   text-decoration: var(--shiki-dark-text-decoration) !important;
@@ -168,6 +168,14 @@ hr {
 
 .prose {
   color: var(--foreground);
+}
+
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  margin: 1.25rem 0 0.75rem;
 }
 
 .prose p,
