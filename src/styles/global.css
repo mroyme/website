@@ -146,6 +146,7 @@ pre > code {
   font-variant-ligatures: none;
 }
 
+/* biome-ignore-start lint/complexity/noImportantStyles: Shiki uses inline token styles. */
 .astro-code,
 .astro-code span {
   background-color: var(--code-background) !important;
@@ -159,6 +160,7 @@ pre > code {
   font-weight: var(--shiki-dark-font-weight) !important;
   text-decoration: var(--shiki-dark-text-decoration) !important;
 }
+/* biome-ignore-end lint/complexity/noImportantStyles: Shiki uses inline token styles. */
 
 blockquote {
   margin: 0 0 1rem;
@@ -233,7 +235,7 @@ hr {
 }
 
 .sr-only {
-  position: absolute !important;
+  position: absolute;
   width: 1px;
   height: 1px;
   margin: 0;

@@ -1,18 +1,17 @@
 // @ts-check
 
-import mdx from "@astrojs/mdx";
-import { unified } from "@astrojs/markdown-remark";
-import sitemap from "@astrojs/sitemap";
-import { defineConfig, fontProviders } from "astro/config";
+import cloudflare from '@astrojs/cloudflare'
+import { unified } from '@astrojs/markdown-remark'
+import mdx from '@astrojs/mdx'
+import sitemap from '@astrojs/sitemap'
 
-import tailwindcss from "@tailwindcss/vite";
-import remarkToc from "remark-toc";
-
-import cloudflare from "@astrojs/cloudflare";
+import tailwindcss from '@tailwindcss/vite'
+import { defineConfig, fontProviders } from 'astro/config'
+import remarkToc from 'remark-toc'
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://mroy.me",
+  site: 'https://mroy.me',
 
   markdown: {
     processor: unified({
@@ -20,8 +19,8 @@ export default defineConfig({
     }),
     shikiConfig: {
       themes: {
-        light: "catppuccin-latte",
-        dark: "catppuccin-mocha",
+        light: 'catppuccin-latte',
+        dark: 'catppuccin-mocha',
       },
     },
   },
@@ -31,44 +30,44 @@ export default defineConfig({
   fonts: [
     {
       provider: fontProviders.local(),
-      name: "IBM Plex Serif",
-      cssVariable: "--font-ibm-plex-serif",
-      fallbacks: ["serif"],
+      name: 'IBM Plex Serif',
+      cssVariable: '--font-ibm-plex-serif',
+      fallbacks: ['serif'],
       options: {
         variants: [
           {
-            src: ["./src/assets/fonts/ibm-plex-serif-variable-roman.woff2"],
-            weight: "100 700",
-            style: "normal",
-            display: "swap",
+            src: ['./src/assets/fonts/ibm-plex-serif-variable-roman.woff2'],
+            weight: '100 700',
+            style: 'normal',
+            display: 'swap',
           },
           {
-            src: ["./src/assets/fonts/ibm-plex-serif-variable-italic.woff2"],
-            weight: "100 700",
-            style: "italic",
-            display: "swap",
+            src: ['./src/assets/fonts/ibm-plex-serif-variable-italic.woff2'],
+            weight: '100 700',
+            style: 'italic',
+            display: 'swap',
           },
         ],
       },
     },
     {
       provider: fontProviders.local(),
-      name: "Lilex",
-      cssVariable: "--font-lilex",
-      fallbacks: ["monospace"],
+      name: 'Lilex',
+      cssVariable: '--font-lilex',
+      fallbacks: ['monospace'],
       options: {
         variants: [
           {
-            src: ["./src/assets/fonts/lilex-variable-roman.woff2"],
-            weight: "100 700",
-            style: "normal",
-            display: "swap",
+            src: ['./src/assets/fonts/lilex-variable-roman.woff2'],
+            weight: '100 700',
+            style: 'normal',
+            display: 'swap',
           },
           {
-            src: ["./src/assets/fonts/lilex-variable-italic.woff2"],
-            weight: "100 700",
-            style: "italic",
-            display: "swap",
+            src: ['./src/assets/fonts/lilex-variable-italic.woff2'],
+            weight: '100 700',
+            style: 'italic',
+            display: 'swap',
           },
         ],
       },
@@ -80,4 +79,4 @@ export default defineConfig({
   },
 
   adapter: cloudflare(),
-});
+})

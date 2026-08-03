@@ -1,24 +1,24 @@
 ---
-const today = new Date();
+const today = new Date()
 
 const links = [
-  { label: "rss", href: "/rss.xml" },
-  { label: "github", href: "https://github.com/mroyme" },
-  { label: "x", href: "https://x.com/mroyme" },
-  { label: "mastodon", href: "https://mastodon.social/@mroy" },
-  { label: "bluesky", href: "https://bsky.app/profile/mroy.me" },
-  { label: "linkedin", href: "https://www.linkedin.com/in/madhurjyaroy" },
-];
+  { label: 'rss', href: '/rss.xml' },
+  { label: 'github', href: 'https://github.com/mroyme' },
+  { label: 'x', href: 'https://x.com/mroyme' },
+  { label: 'mastodon', href: 'https://mastodon.social/@mroy' },
+  { label: 'bluesky', href: 'https://bsky.app/profile/mroy.me' },
+  { label: 'linkedin', href: 'https://www.linkedin.com/in/madhurjyaroy' },
+]
 
 function getExternalLinkProps(href: string) {
-  if (!href.startsWith("http")) {
-    return {};
+  if (!href.startsWith('http')) {
+    return {}
   }
 
   return {
-    rel: "noopener noreferrer",
-    target: "_blank",
-  };
+    rel: 'noopener noreferrer',
+    target: '_blank',
+  }
 }
 ---
 
