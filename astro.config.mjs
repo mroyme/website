@@ -8,9 +8,12 @@ import { defineConfig, fontProviders } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import remarkToc from "remark-toc";
 
+import cloudflare from "@astrojs/cloudflare";
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://www.mroy.me",
+
   markdown: {
     processor: unified({
       remarkPlugins: [[remarkToc, { maxDepth: 3 }]],
@@ -22,6 +25,7 @@ export default defineConfig({
       },
     },
   },
+
   integrations: [mdx(), sitemap()],
 
   fonts: [
@@ -74,4 +78,6 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+
+  adapter: cloudflare(),
 });
