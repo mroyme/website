@@ -132,11 +132,26 @@ pre {
   border-radius: 0.5rem;
   background: var(--code-background);
   padding: 1.5rem;
+  font-size: 0.875rem;
 }
 
 pre > code {
   all: unset;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.astro-code,
+.astro-code span {
+  background-color: var(--background) !important;
+}
+
+.dark .astro-code,
+.dark .astro-code span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--background) !important;
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
 }
 
 blockquote {
@@ -174,6 +189,23 @@ hr {
 
 .prose ol {
   list-style: decimal;
+}
+
+.prose table {
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+
+.prose th,
+.prose td {
+  border: 1px solid var(--border);
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+
+.prose th {
+  background: var(--code-background);
+  font-weight: 600;
 }
 
 .prose a {

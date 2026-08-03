@@ -1,0 +1,60 @@
+---
+interface Props {
+  chart: string;
+}
+
+const { chart } = Astro.props;
+---
+
+<pre class="mermaid" data-mermaid-diagram={chart}>{chart}</pre>
+
+<script>
+  import mermaid from "mermaid";
+
+  const diagrams = document.querySelectorAll<HTMLElement>(
+    "[data-mermaid-diagram]",
+  );
+
+  async function renderDiagrams() {
+    const darkMode = document.documentElement.classList.contains("dark");
+
+    mermaid.initialize({
+      startOnLoad: false,
+      securityLevel: "strict",
+      theme: darkMode ? "dark" : "default",
+      darkMode,
+    });
+
+    diagrams.forEach((diagram) => {
+      diagram.removeAttribute("data-processed");
+      diagram.textContent = diagram.dataset.mermaidDiagram ?? "";
+    });
+
+    await mermaid.run({ nodes: diagrams });
+  }
+
+  void renderDiagrams();
+
+  new MutationObserver(() => {
+    void renderDiagrams();
+  }).observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["class"],
+  });
+</script>
+
+<style>
+  .mermaid {
+    margin: 0 0 1rem;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    padding: 0;
+    text-align: center;
+  }
+
+  :global(.mermaid svg) {
+    height: auto;
+    max-width: 100%;
+  }
+</style>

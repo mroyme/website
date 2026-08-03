@@ -1,14 +1,27 @@
 // @ts-check
 
 import mdx from "@astrojs/mdx";
+import { unified } from "@astrojs/markdown-remark";
 import sitemap from "@astrojs/sitemap";
 import { defineConfig, fontProviders } from "astro/config";
 
 import tailwindcss from "@tailwindcss/vite";
+import remarkToc from "remark-toc";
 
 // https://astro.build/config
 export default defineConfig({
   site: "https://www.mroy.me",
+  markdown: {
+    processor: unified({
+      remarkPlugins: [[remarkToc, { maxDepth: 3 }]],
+    }),
+    shikiConfig: {
+      themes: {
+        light: "kanagawa-lotus",
+        dark: "kanagawa-dragon",
+      },
+    },
+  },
   integrations: [mdx(), sitemap()],
 
   fonts: [
