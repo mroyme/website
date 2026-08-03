@@ -70,11 +70,14 @@ import HeaderLink from "./HeaderLink.astro";
     cursor: pointer;
     font: inherit;
     padding: 0.25rem 0.5rem;
-    transition: color 150ms ease;
+    transition:
+      background-color 150ms ease,
+      color 150ms ease;
   }
 
   button:hover {
-    color: var(--foreground);
+    background: var(--foreground);
+    color: var(--background);
   }
 
   @media (max-width: 720px) {
