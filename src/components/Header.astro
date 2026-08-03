@@ -38,8 +38,41 @@ import HeaderLink from "./HeaderLink.astro";
   button?.addEventListener("click", () => {
     const nextTheme = root.classList.contains("dark") ? "light" : "dark";
 
-    localStorage.setItem("theme", nextTheme);
-    setTheme(nextTheme);
+    const updateTheme = () => {
+      localStorage.setItem("theme", nextTheme);
+      setTheme(nextTheme);
+    };
+
+    if (
+      !(button instanceof HTMLButtonElement) ||
+      !document.startViewTransition ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      updateTheme();
+      return;
+    }
+
+    const { left, top, width, height } = button.getBoundingClientRect();
+    const x = left + width / 2;
+    const y = top + height / 2;
+    const endRadius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+    const transition = document.startViewTransition(updateTheme);
+
+    transition.ready.then(() => {
+      document.documentElement.animate(
+        {
+          clipPath: [
+            `circle(0px at ${x}px ${y}px)`,
+            `circle(${endRadius}px at ${x}px ${y}px)`,
+          ],
+        },
+        {
+          duration: 500,
+          easing: "ease-in-out",
+          pseudoElement: "::view-transition-new(root)",
+        },
+      );
+    });
   });
 </script>
 
@@ -78,6 +111,12 @@ import HeaderLink from "./HeaderLink.astro";
   button:hover {
     background: var(--foreground);
     color: var(--background);
+  }
+
+  :global(::view-transition-old(root)),
+  :global(::view-transition-new(root)) {
+    animation: none;
+    mix-blend-mode: normal;
   }
 
   @media (max-width: 720px) {
