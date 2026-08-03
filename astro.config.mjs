@@ -27,21 +27,43 @@ export default defineConfig({
   fonts: [
     {
       provider: fontProviders.local(),
-      name: "Atkinson",
-      cssVariable: "--font-atkinson",
-      fallbacks: ["sans-serif"],
+      name: "IBM Plex Serif",
+      cssVariable: "--font-ibm-plex-serif",
+      fallbacks: ["serif"],
       options: {
         variants: [
           {
-            src: ["./src/assets/fonts/atkinson-regular.woff"],
-            weight: 400,
+            src: ["./src/assets/fonts/ibm-plex-serif-variable-roman.woff2"],
+            weight: "100 700",
             style: "normal",
             display: "swap",
           },
           {
-            src: ["./src/assets/fonts/atkinson-bold.woff"],
-            weight: 700,
+            src: ["./src/assets/fonts/ibm-plex-serif-variable-italic.woff2"],
+            weight: "100 700",
+            style: "italic",
+            display: "swap",
+          },
+        ],
+      },
+    },
+    {
+      provider: fontProviders.local(),
+      name: "Lilex",
+      cssVariable: "--font-lilex",
+      fallbacks: ["monospace"],
+      options: {
+        variants: [
+          {
+            src: ["./src/assets/fonts/lilex-variable-roman.woff2"],
+            weight: "100 700",
             style: "normal",
+            display: "swap",
+          },
+          {
+            src: ["./src/assets/fonts/lilex-variable-italic.woff2"],
+            weight: "100 700",
+            style: "italic",
             display: "swap",
           },
         ],
