@@ -12,12 +12,7 @@ export async function GET(context) {
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
     site: context.site,
-    xmlns: {
-      atom: "http://www.w3.org/2005/Atom",
-    },
-    customData:
-      `<atom:link href="${new URL("feed.xml", context.site)}" rel="self" type="application/rss+xml" />` +
-      `<language>en-GB</language><copyright>All rights reserved ${new Date().getFullYear()}, Madhurjya Roy</copyright>`,
+    customData: `<language>en-GB</language><copyright>All rights reserved ${new Date().getFullYear()}, Madhurjya Roy</copyright>`,
     items: posts.map((post) => ({
       title: post.data.title,
       description: post.data.description,
