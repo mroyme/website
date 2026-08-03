@@ -65,9 +65,7 @@ const documentTitle = title === SITE_TITLE ? title : `${title} | ${SITE_TITLE}`;
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-{
-  image && <meta property="og:image" content={new URL(image.src, Astro.url)} />
-}
+{image && <meta property="og:image" content={new URL(image.src, Astro.url)} />}
 {
   publishedTime && (
     <meta
