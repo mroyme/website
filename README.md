@@ -1,63 +1,58 @@
-# Astro Starter Kit: Blog
+# mroy.me
 
-```sh
-pnpm create astro@latest -- --template blog
+Source for [mroy.me](https://mroy.me), a personal site and writing archive built with Astro.
+
+## Stack
+
+- Astro with the Cloudflare adapter
+- Tailwind CSS 4
+- Markdown and MDX content collections
+- Shiki syntax highlighting with Catppuccin light and dark themes
+- Local IBM Plex Serif and Lilex fonts
+- RSS, sitemap, robots.txt, and canonical metadata
+- Mermaid diagrams in MDX
+
+## Local development
+
+Requires Node.js `>=22.12.0` and pnpm.
+
+| Command               | Description                                              |
+| --------------------- | -------------------------------------------------------- |
+| `pnpm install`        | Install dependencies.                                    |
+| `pnpm dev`            | Start the development server at `http://localhost:4321`. |
+| `pnpm build`          | Create a production build in `dist/`.                    |
+| `pnpm preview`        | Serve the production build locally.                      |
+| `pnpm generate-types` | Regenerate Cloudflare Worker types.                      |
+
+## Writing
+
+Posts live in [`src/content/blog/`](src/content/blog/) as Markdown or MDX files. Each requires this frontmatter:
+
+```yaml
+---
+title: A post title
+description: A concise summary
+pubDate: 2026-08-04
+updatedDate: 2026-08-05 # Optional
+heroImage: ./image.png # Optional
+---
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+To include a table of contents, add a `## Table of contents` heading. It is populated from headings through level three. Use the local `Mermaid` component in an MDX post for diagrams.
 
-Features:
-
-- ✅ Minimal styling (make it your own!)
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and Open Graph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
+## Structure
 
 ```text
-├── public/
-├── src/
-│   ├── assets/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   └── pages/
-├── astro.config.mjs
-├── README.md
-├── package.json
-└── tsconfig.json
+src/
+  assets/fonts/       Local font files
+  components/         Shared site components
+  content/blog/       Markdown and MDX posts
+  pages/              Site routes, RSS, robots.txt, and 404 page
+  styles/             Global styles
+astro.config.mjs      Astro, Markdown, font, and adapter configuration
+wrangler.jsonc        Cloudflare Workers configuration
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Deployment
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                | Action                                           |
-| :--------------------- | :----------------------------------------------- |
-| `pnpm install`         | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
-
-## Credit
-
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+The site is configured for Cloudflare Workers with `@astrojs/cloudflare`. `wrangler.jsonc` serves the generated assets and enables the custom 404 page. Deploy through the linked Cloudflare Workers project after a successful `pnpm build`.

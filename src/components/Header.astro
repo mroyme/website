@@ -55,7 +55,10 @@ import HeaderLink from "./HeaderLink.astro";
     const { left, top, width, height } = button.getBoundingClientRect();
     const x = left + width / 2;
     const y = top + height / 2;
-    const endRadius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+    const endRadius = Math.hypot(
+      Math.max(x, innerWidth - x),
+      Math.max(y, innerHeight - y),
+    );
     const transition = document.startViewTransition(updateTheme);
 
     transition.ready.then(() => {
