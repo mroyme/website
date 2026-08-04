@@ -5,7 +5,6 @@ import { unified } from '@astrojs/markdown-remark'
 import mdx from '@astrojs/mdx'
 import sitemap from '@astrojs/sitemap'
 
-import tailwindcss from '@tailwindcss/vite'
 import { defineConfig, fontProviders } from 'astro/config'
 import remarkToc from 'remark-toc'
 
@@ -73,10 +72,5 @@ export default defineConfig({
       },
     },
   ],
-
-  vite: {
-    plugins: [tailwindcss()],
-  },
-
   adapter: cloudflare(),
 })
