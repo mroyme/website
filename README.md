@@ -5,12 +5,11 @@ Source for [mroy.me](https://mroy.me), a personal site and writing archive built
 ## Stack
 
 - Astro with the Cloudflare adapter
-- Tailwind CSS 4
 - Markdown and MDX content collections
-- Shiki syntax highlighting with Catppuccin light and dark themes
+- Shiki syntax highlighting with Kanagawa Lotus and Dragon themes
 - Local IBM Plex Serif and Lilex fonts
 - RSS, sitemap, robots.txt, and canonical metadata
-- Mermaid diagrams in MDX
+- Build-time Mermaid diagrams in Markdown and MDX
 
 ## Local development
 
@@ -38,7 +37,7 @@ heroImage: ./image.png # Optional
 ---
 ```
 
-To include a table of contents, add a `## Table of contents` heading. It is populated from headings through level three. Use the local `Mermaid` component in an MDX post for diagrams.
+To include a table of contents, add a `## Table of contents` heading. It is populated from headings through level three. Use a `mermaid` code fence for diagrams.
 
 ## Structure
 
@@ -49,7 +48,7 @@ src/
   content/blog/       Markdown and MDX posts
   pages/              Site routes, RSS, robots.txt, and 404 page
   styles/             Global styles
-astro.config.mjs      Astro, Markdown, font, and adapter configuration
+astro.config.ts       Astro, Markdown, font, and adapter configuration
 wrangler.jsonc        Cloudflare Workers configuration
 ```
 

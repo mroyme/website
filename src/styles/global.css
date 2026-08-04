@@ -6,25 +6,25 @@
 
 :root {
   color-scheme: light;
-  --accent: #1e66f5;
-  --accent-hover: #209fb5;
-  --background: #eff1f5;
-  --foreground: #4c4f69;
-  --muted: #5c5f77;
-  --border: #bcc0cc;
-  --code-background: #ccd0da;
+  --accent: #4d699b;
+  --accent-hover: #5d57a3;
+  --background: #f2ecbc;
+  --foreground: #545464;
+  --muted: #716e61;
+  --border: #c8c093;
+  --code-background: #e5ddb0;
   --ring: var(--accent);
 }
 
 .dark {
   color-scheme: dark;
-  --accent: #89b4fa;
-  --accent-hover: #74c7ec;
-  --background: #1e1e2e;
-  --foreground: #cdd6f4;
-  --muted: #bac2de;
-  --border: #45475a;
-  --code-background: #313244;
+  --accent: #8ba4b0;
+  --accent-hover: #7fb4ca;
+  --background: #181616;
+  --foreground: #c5c9c5;
+  --muted: #a6a69c;
+  --border: #625e5a;
+  --code-background: #1d1c19;
   --ring: var(--accent);
 }
 
@@ -46,12 +46,12 @@ body {
 }
 
 body::selection {
-  background: color-mix(in srgb, #7c7f93 25%, transparent);
+  background: color-mix(in srgb, #8a8980 35%, transparent);
   color: var(--foreground);
 }
 
 .dark body::selection {
-  background: color-mix(in srgb, #9399b2 25%, transparent);
+  background: color-mix(in srgb, #8992a7 35%, transparent);
   color: var(--foreground);
 }
 
