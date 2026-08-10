@@ -27,7 +27,7 @@ function getExternalLinkProps(href: string) {
     {
       links.map((link) => (
         <li>
-          <a class="social-link" href={link.href} {...getExternalLinkProps(link.href)}>
+          <a href={link.href} {...getExternalLinkProps(link.href)}>
             <svg
               aria-hidden="true"
               focusable="false"
@@ -67,7 +67,7 @@ function getExternalLinkProps(href: string) {
     padding: 0;
   }
 
-  .social-link {
+  a {
     align-items: center;
     border-radius: 0.125rem;
     color: var(--muted);
@@ -77,15 +77,15 @@ function getExternalLinkProps(href: string) {
     transition: color 150ms ease;
   }
 
-  .social-link:hover {
+  a:hover {
     color: var(--accent);
   }
 
-  .social-link svg {
+  svg {
     flex: 0 0 auto;
   }
 
-  .social-link span {
+  span {
     margin-left: 0.5rem;
     min-height: 1.75rem;
   }
