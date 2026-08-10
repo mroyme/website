@@ -78,7 +78,7 @@ const posts = (await getCollection('blog')).sort(
           {
             posts.map((post) => (
               <li>
-                <a href={`/blog/${post.id}/`}>
+                <a href={`/writing/${post.id}/`}>
                   <p class="date">
                     {post.data.pubDate.toLocaleDateString("en-GB", {
                       day: "numeric",

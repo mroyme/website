@@ -3,4 +3,4 @@
 
 export const SITE_TITLE = 'Madhurjya Roy'
 export const SITE_DESCRIPTION =
-  'Personal website of Madhurjya Roy, featuring notes on software, systems, developer tooling, Linux, homelab projects, and other interests.'
+  'Essays and notes by Madhurjya Roy about things he finds himself thinking about.'
