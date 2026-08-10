@@ -55,3 +55,10 @@ wrangler.jsonc        Cloudflare Workers configuration
 ## Deployment
 
 The site is configured for Cloudflare Workers with `@astrojs/cloudflare`. `wrangler.jsonc` serves the generated assets and enables the custom 404 page. Deploy through the linked Cloudflare Workers project after a successful `pnpm build`.
+
+## License
+
+Source code in this repository is licensed under the [MIT License](LICENSE).
+Blog posts, essays, images, and other non-code content are licensed under the
+[Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License](CONTENT_LICENSE.md)
+unless otherwise noted.
